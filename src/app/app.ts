@@ -3,7 +3,8 @@ import { RouterOutlet } from '@angular/router';
 import { Header } from './header/header';
 import { User } from './user/user';
 import { Tasks } from './tasks/tasks';
-import { USERS } from './fake_users';
+import { USERS } from './user/fake_users';
+import { Task } from './tasks/task/task';
 
 @Component({
   selector: 'app-root',
@@ -13,12 +14,12 @@ import { USERS } from './fake_users';
 })
 export class App {
   protected readonly title = signal('lesson-2');
-  USERS=USERS;
-  selectedUser: typeof USERS[0] | null = null;
+  users=USERS;
+  selectedUser?:any;
 
   onUserSelected(id:string)
   {
-    this.selectedUser=USERS.find(item=>item.id===id)! 
+    this.selectedUser=this.users.find(item=>item.id===id)! 
     console.log('selected user', this.selectedUser)
   }
 
