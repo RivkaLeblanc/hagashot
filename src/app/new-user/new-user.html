@@ -1,0 +1,32 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+
+<div formGroupName="name">
+
+<input type="text" formControlName="firstName"/>
+<input type="text" formControlName="lastName"/>
+
+</div>
+
+<input type="email" formControlName="email"/>
+
+<div formGroupName="password">
+
+<input type="password" formControlName="password"/>
+<input type="password" formControlName="confirmPassword"/>
+@if (form.hasError('mismach')&&form.touched){
+    <div class="error">The passwords don't match</div>
+}
+
+</div>
+
+<div formArrayName="categories">
+    @for (cat of categories; track $index) {
+        <label>
+            <input type="checkbox" [formControlName]="$index"/>
+           {{cat}}
+        </label>
+    }
+</div>
+
+<button type="submit">Create</button>
+</form>

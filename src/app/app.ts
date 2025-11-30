@@ -5,10 +5,11 @@ import { User } from './user/user';
 import { Tasks } from './tasks/tasks';
 import { USERS } from './user/fake_users';
 import { Task } from './tasks/task/task';
+import { NewUser } from './new-user/new-user';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,Header,User,Tasks],
+  imports: [RouterOutlet,Header,User,Tasks,NewUser],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -22,5 +23,6 @@ export class App {
     this.selectedUser=this.users.find(item=>item.id===id)! 
     console.log('selected user', this.selectedUser)
   }
+
 
 }

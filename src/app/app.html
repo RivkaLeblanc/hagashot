@@ -17,4 +17,12 @@
     <p>please pick a user</p>
 }
 
+<button (click)="openNewUser()">הוספת משתמש חדש</button>
+
+<div *ngIf="showNewUser" class="popup-box">
+  <app-new-user></app-new-user>
+
+<button (click)="closeNewUser()">סגור</button>
+</div>
+
 </main>
