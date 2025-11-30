@@ -1,32 +1,80 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
 
-<div formGroupName="name">
+    <div formGroupName="name">
+  
+      <label>First Name:</label>
+      <input type="text" formControlName="firstName"/>
+  
+      @if (firstNameRequired) {
+        <div class="error">First name is required</div>
+      }
+      @if (firstNamePassedMax) {
+        <div class="error">First name must be at most 18 characters</div>
+      }
+  
+      <label>Last Name:</label>
+      <input type="text" formControlName="lastName"/>
+  
+      @if (lastNameRequired) {
+        <div class="error">Last name is required</div>
+      }
+      @if (lastNamePassedMax) {
+        <div class="error">Last name must be at most 18 characters</div>
+      }
+  
+    </div>
+  
+  
+    <label>Email:</label>
+    <input type="email" formControlName="email"/>
+  
+    @if (emailRequired) {
+      <div class="error">Email is required</div>
+    }
+    @if (emailInvalid) {
+      <div class="error">Email is not valid</div>
+    }
+  
+  
+    <div formGroupName="password">
+  
+      <label>Password:</label>
+      <input type="password" formControlName="password"/>
+  
+      @if (passwordMinLength) {
+        <div class="error">Password must be at least 6 characters</div>
+      }
+  
+      <label>Confirm Password:</label>
+      <input type="password" formControlName="confirmPassword"/>
+  
+      @if (confirmPasswordMinLength) {
+        <div class="error">Confirm password must be at least 6 characters</div>
+      }
+  
+      @if (form.get('password')?.hasError('mismatch') &&
+    (form.get('password.password')?.touched &&
+     form.get('password.confirmPassword')?.touched)) {
 
-<input type="text" formControlName="firstName"/>
-<input type="text" formControlName="lastName"/>
-
-</div>
-
-<input type="email" formControlName="email"/>
-
-<div formGroupName="password">
-
-<input type="password" formControlName="password"/>
-<input type="password" formControlName="confirmPassword"/>
-@if (form.hasError('mismach')&&form.touched){
     <div class="error">The passwords don't match</div>
 }
 
-</div>
-
-<div formArrayName="categories">
-    @for (cat of categories; track $index) {
-        <label>
-            <input type="checkbox" [formControlName]="$index"/>
-           {{cat}}
+  
+    </div>
+  
+  
+    <div formArrayName="categories">
+      <label>Categories:</label>
+      <br>
+  
+      @for (cat of categories; track $index) {
+        <label class="category-row">
+          <input type="checkbox" formControlName="{{ $index }}"/>
+          {{cat}}
         </label>
-    }
-</div>
-
-<button type="submit">Create</button>
-</form>
+      }
+    </div>
+  <button (click)="cancel()">Cancel</button>
+    <button type="submit"  [disabled]="form.invalid">Create</button>
+  </form>
+  

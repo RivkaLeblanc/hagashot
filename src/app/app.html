@@ -17,12 +17,12 @@
     <p>please pick a user</p>
 }
 
-<button (click)="openNewUser()">הוספת משתמש חדש</button>
+<div class="actions">
+  <button (click)="openNewUser()" >Add User</button>
+  </div>
 
-<div *ngIf="showNewUser" class="popup-box">
-  <app-new-user></app-new-user>
-
-<button (click)="closeNewUser()">סגור</button>
-</div>
-
+@if(showNewUser)
+{
+  <app-new-user (addNewUser)="userFormValue($event)"></app-new-user>
+}
 </main>

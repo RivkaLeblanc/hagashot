@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal,Output,EventEmitter } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Header } from './header/header';
 import { User } from './user/user';
@@ -6,6 +6,8 @@ import { Tasks } from './tasks/tasks';
 import { USERS } from './user/fake_users';
 import { Task } from './tasks/task/task';
 import { NewUser } from './new-user/new-user';
+import { UserObj } from './user/user.model';
+import { Form } from '../../node_modules/@angular/forms/index';
 
 @Component({
   selector: 'app-root',
@@ -13,10 +15,17 @@ import { NewUser } from './new-user/new-user';
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
+
+
+
 export class App {
   protected readonly title = signal('lesson-2');
   users=USERS;
   selectedUser?:any;
+  showNewUser=false;
+
+
+  @Output()  addingNewUserForm=new EventEmitter<boolean>();
 
   onUserSelected(id:string)
   {
@@ -24,5 +33,15 @@ export class App {
     console.log('selected user', this.selectedUser)
   }
 
+  userFormValue(user:UserObj )
+  {
+    this.users.push(user);
+    this.users = [...this.users];
+  
+  }
+  
+  
+
+  
 
 }
