@@ -23,6 +23,6 @@
 
 @if(showNewUser)
 {
-  <app-new-user (addNewUser)="userFormValue($event)"></app-new-user>
+  <app-new-user (cancelNewUserForm)="closeForm($event)"  (addNewUser)="userFormValue($event)"></app-new-user>
 }
 </main>

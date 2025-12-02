@@ -14,12 +14,12 @@ import { UserObj } from '../user/user.model';
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './new-user.html',
-  styleUrl: './new-user.css'
+  styleUrls: ['./new-user.css']
 })
 export class NewUser {
 
 @Output()  addNewUser =new EventEmitter<UserObj>();
-@Output()  addingNewUserForm=new EventEmitter<boolean>();
+@Output()  cancelNewUserForm=new EventEmitter<boolean>();
 
 
   categories = ["work", "personal", "urgent"];
@@ -99,7 +99,7 @@ export class NewUser {
   
   cancel()
   {
-
+   this.cancelNewUserForm.emit(false)
   }
 
 }

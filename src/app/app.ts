@@ -39,9 +39,17 @@ export class App {
     this.users = [...this.users];
   
   }
+
+  openNewUser(){
+    this.showNewUser=true;
+  }
+
+  closeForm(state:boolean){
+    this.showNewUser=state;
+  }
   
   
 
-  
+
 
 }
